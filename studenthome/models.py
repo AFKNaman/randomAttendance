@@ -146,6 +146,12 @@ class SwitchSeat(models.Model):
 # Upload crib scores
 #--------------------------------------------------------
 
+class ExamAbsence(models.Model):
+    rollno        = models.CharField(max_length=10)
+    exam_id       = models.IntegerField(verbose_name = "Exam id", default=0,null=True)
+    reason        = models.TextField(verbose_name="Absence Reason",max_length=200,null=True)
+    proofPath     = models.CharField(max_length=200)
+
 class ExamMark(models.Model):
     #-------------------------------
     # Roll,Exam,Question
@@ -199,7 +205,7 @@ class Exam(models.Model):
     mark9  = models.IntegerField ( verbose_name = "Marks Question 9", null=True, blank=True )
     mark10 = models.IntegerField ( verbose_name = "Marks Question 10", null=True, blank=True )
     link   = models.CharField(max_length=100, null=True) # security feature
-    marks  = models.TextField( verbose_name="Student scores in (CSV) (Header: ROLL NO,Q1,Q2,..,Qk,Comment1,...,Commentk) [ROLL NO contains roll no separated by -]", max_length=20000, null=True, blank=True)
+    marks  = models.TextField( verbose_name="Student scores in (CSV) (Header: ROLL NO,Q1,Q2,..,Qk,Comment1,...,Commentk) [ROLL NO contains roll no separated by -]", max_length=40000, null=True, blank=True)
     regrade = models.TextField( verbose_name="Student scores in (CSV) (Header: ROLL NO,Qi)", max_length=20000, null=True, blank=True)
     regrade_reason = models.TextField(verbose_name="Why are we regrading?",max_length=200,null=True)
     is_cribs_active = models.BooleanField( verbose_name = "Is Cribs active?" , default=True)
